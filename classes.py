@@ -1,4 +1,4 @@
-from classes_functions import find_figure_by_position
+from chess.figures.figures_functions import find_figure_by_position
 
 
 
@@ -121,8 +121,32 @@ class Pawn:
                 or\
                 ((possible_move not in board.taken_squares) and (french_pawn.color != 'b') and (french_pawn.en_passant_possible == True)):
                     self.possible_moves.append(possible_move)
-
-        
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????        
 
     def move(self, new_position):
         if (self.is_alive == True) and new_position in self.possible_moves:
@@ -138,12 +162,72 @@ class Pawn:
             print('This move is not possible. Please enter something sane')
 
 class Bishop:
-    pass
+
+    def __init__(self, board, name, color, current_position, is_alive = True):
+
+        self.name = name
+        self.color = color
+        self.current_position = current_position
+        self.possible_moves = []
+        self.is_alive = is_alive
+        board.all_figures.append(self)
+
+    def check_possible_moves(self, board):
+        leap_denier = 0
+        self.possible_moves = []
+        letter = self.current_position[0]
+        asc_letter = ord(letter)
+        number = self.current_position[1]
+
+        for x in range(1, 8, 1):
+            up_number = number + x
+            down_number = number - x
+            up_letter = asc_letter + x
+            down_letter = asc_letter - x
+
+
+
+            
+
+
+
+    def move(self, new_position):
+        if (self.is_alive == True) and new_position in self.possible_moves:
+            self.current_position = new_position
+        else:
+            print('This move is not possible. Please enter something sane')
+
+    def take(self, new_position, other_piece):
+        if (self.is_alive == True) and new_position in self.possible_moves:
+            self.current_position = new_position
+            other_piece.is_alive = False
+        else:
+            print('This move is not possible. Please enter something sane')
+
 
 class Knight:
+
+    def __init__(self, board, name, color, current_position, is_alive = True):
+
+        self.name = name
+        self.color = color
+        self.current_position = current_position
+        self.possible_moves = []
+        self.is_alive = is_alive
+        board.all_figures.append(self)
     pass
 
 class Rook:
+
+    def __init__(self, board, name, color, current_position, first_move = True, is_alive = True):
+
+        self.name = name
+        self.color = color
+        self.current_position = current_position
+        self.possible_moves = []
+        self.first_move = first_move
+        self.is_alive = is_alive
+        board.all_figures.append(self)
     pass
 
 class Queen:
