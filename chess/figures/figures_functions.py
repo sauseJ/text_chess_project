@@ -5,7 +5,9 @@ def find_figure_by_position(all_figures, position):
     
 
 
-def checking_squares_for_bishops(bishop, board, up_number, down_number, up_letter, down_letter, all_squares):
+def checking_squares_for_bishops(bishop, board, up_number, down_number, up_letter, down_letter, all_squares, leap_uu=0, leap_ud=0, leap_du=0, leap_dd=0):
+#    bishop.possible_moves = []
+
     possible_move_uu = f'{up_letter} + {up_number}'
     figure_uu = find_figure_by_position(board.all_figures, possible_move_uu)
     possible_move_ud = f'{up_letter} + {down_number}'
@@ -23,4 +25,30 @@ def checking_squares_for_bishops(bishop, board, up_number, down_number, up_lette
         bishop.possible_moves.append(possible_move_uu)
         leap_uu +=1
         
+        
+    if (possible_move_ud in all_squares) and (possible_move_ud not in board.taken_squares):
+        bishop.possible_moves.append(possible_move_ud)
+
+    if (possible_move_ud in all_squares) and (possible_move_ud in board.taken_squares) \
+    and (leap_ud < 1) and (bishop.color != figure_ud.color):
+        bishop.possible_moves.append(possible_move_ud)
+        leap_ud +=1
+
+        
+    if (possible_move_du in all_squares) and (possible_move_du not in board.taken_squares):
+        bishop.possible_moves.append(possible_move_du)
+
+    if (possible_move_du in all_squares) and (possible_move_du in board.taken_squares) \
+    and (leap_du < 1) and (bishop.color != figure_du.color):
+        bishop.possible_moves.append(possible_move_du)
+        leap_du +=1
+
+        
+    if (possible_move_dd in all_squares) and (possible_move_dd not in board.taken_squares):
+        bishop.possible_moves.append(possible_move_dd)
+
+    if (possible_move_dd in all_squares) and (possible_move_dd in board.taken_squares) \
+    and (leap_dd < 1) and (bishop.color != figure_dd.color):
+        bishop.possible_moves.append(possible_move_dd)
+        leap_dd +=1
         
