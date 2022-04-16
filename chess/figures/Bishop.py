@@ -1,5 +1,5 @@
 from base import Figure
-from chess.figures.figures_functions import checking_squares_for_bishops
+from chess.figures.figures_functions import checking_diogonals
 
 class Bishop(Figure):
 
@@ -17,7 +17,7 @@ class Bishop(Figure):
             down_number = number - x
             up_letter = asc_letter + x
             down_letter = asc_letter - x
-            checking_squares_for_bishops(self, board, up_number, down_number, up_letter, down_letter, board.all_squares)
+            checking_diogonals(self, board, up_number, down_number, up_letter, down_letter, board.all_squares)
 
 
     def move(self, new_position):
