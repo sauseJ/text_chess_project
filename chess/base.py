@@ -33,12 +33,13 @@ class Board:
 
 class Figure:
 
-    def __init__(self, board, name, color, current_position, is_alive = True):
+    def __init__(self, board, name, color, current_position, is_alive = True, is_checking = False):
 
         self.name = name
         self.color = color
         self.current_position = current_position
         self.possible_moves = []
         self.is_alive = is_alive
+        self.is_checking = is_checking
         board.all_figures.append(self)
 
