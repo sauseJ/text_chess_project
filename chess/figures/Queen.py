@@ -17,7 +17,7 @@ class Queen(Figure):
             down_number = number - x
             up_letter = asc_letter + x
             down_letter = asc_letter - x
-            checking_all_sides(self, board, letter, number, up_number, down_number, up_letter, down_letter, board.all_squares)
+            checking_all_sides(self, board, asc_letter, number, up_number, down_number, up_letter, down_letter, board.all_squares)
             checking_diogonals(self, board, up_number, down_number, up_letter, down_letter, board.all_squares)
 
 
