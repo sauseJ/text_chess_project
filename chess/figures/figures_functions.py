@@ -6,15 +6,16 @@ def find_figure_by_position(all_figures, position):
 
 
 def checking_diogonals(figure, board, up_number, down_number, up_letter, down_letter, all_squares, leap_uu=0, leap_ud=0, leap_du=0, leap_dd=0):
-#    figure.possible_moves = []
+    chr_up_letter = chr(up_letter)
+    chr_down_letter = chr(down_letter)
 
-    possible_move_uu = f'{up_letter} + {up_number}'
+    possible_move_uu = f'{chr_up_letter} + {up_number}'
     figure_uu = find_figure_by_position(board.all_figures, possible_move_uu)
-    possible_move_ud = f'{up_letter} + {down_number}'
+    possible_move_ud = f'{chr_up_letter} + {down_number}'
     figure_ud = find_figure_by_position(board.all_figures, possible_move_ud)
-    possible_move_du = f'{down_letter} + {up_number}'
+    possible_move_du = f'{chr_down_letter} + {up_number}'
     figure_du = find_figure_by_position(board.all_figures, possible_move_du)
-    possible_move_dd = f'{down_letter} + {down_number}'
+    possible_move_dd = f'{chr_down_letter} + {down_number}'
     figure_dd = find_figure_by_position(board.all_figures, possible_move_dd)
 
     if (possible_move_uu in all_squares) and (possible_move_uu not in board.taken_squares):
@@ -53,14 +54,17 @@ def checking_diogonals(figure, board, up_number, down_number, up_letter, down_le
         leap_dd +=1
         
 def checking_all_sides(figure, board, letter, number, up_number, down_number, up_letter, down_letter, all_squares, leap_u=0, leap_d=0, leap_l=0, leap_r=0):
+    chr_up_letter = chr(up_letter)
+    chr_down_letter = chr(down_letter)
+    chr_letter = chr(letter)
 
-    possible_move_u = f'{letter} + {up_number}'
+    possible_move_u = f'{chr_letter} + {up_number}'
     figure_u = find_figure_by_position(board.all_figures, possible_move_u)
-    possible_move_d = f'{letter} + {down_number}'
+    possible_move_d = f'{chr_letter} + {down_number}'
     figure_d = find_figure_by_position(board.all_figures, possible_move_d)
-    possible_move_r = f'{up_letter} + {number}'
+    possible_move_r = f'{chr_up_letter} + {number}'
     figure_l = find_figure_by_position(board.all_figures, possible_move_r)
-    possible_move_l = f'{down_letter} + {number}'
+    possible_move_l = f'{chr_down_letter} + {number}'
     figure_r = find_figure_by_position(board.all_figures, possible_move_l)
 
     if (possible_move_u in all_squares) and (possible_move_u not in board.taken_squares):
@@ -97,3 +101,31 @@ def checking_all_sides(figure, board, letter, number, up_number, down_number, up
     and (leap_r < 1) and (figure.color != figure_r.color):
         figure.possible_moves.append(possible_move_r)
         leap_r +=1
+
+
+def checking_squares_for_knight(figure, board, number, letter, xnumber, xletter, all_squares):
+    chr_xletter = chr(xletter)
+    chr_letter = chr(letter)
+
+    for y in range(-1, 2, 1):
+        if y == 0: continue
+        yletter = chr_letter + y
+        chr_yletter = chr(yletter)
+        ynumber = number + y
+
+        possible_move_num = f'{chr_yletter} + {xnumber}'
+        possible_move_let = f'{chr_xletter} + {ynumber}'
+
+        if possible_move_num in all_squares:
+            if possible_move_num not in board.taken_squares:
+                figure.possible_moves.append(possible_move_num)
+            else:
+                if find_figure_by_position(board.all_figures, possible_move_num).color != figure.color:
+                    figure.possible_moves.append(possible_move_num)
+        
+        if possible_move_let in all_squares:
+            if possible_move_let not in board.taken_squares:
+                figure.possible_moves.append(possible_move_let)
+            else:
+                if find_figure_by_position(board.all_figures, possible_move_let).color != figure.color:
+                    figure.possible_moves.append(possible_move_let)
