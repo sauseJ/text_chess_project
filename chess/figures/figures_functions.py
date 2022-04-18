@@ -129,3 +129,11 @@ def checking_squares_for_knight(figure, board, number, letter, xnumber, xletter,
             else:
                 if find_figure_by_position(board.all_figures, possible_move_let).color != figure.color:
                     figure.possible_moves.append(possible_move_let)
+
+def checking_protection(figure, board):
+    figure.is_protected = False
+    
+    for f in board.all_figures:
+        if (figure.current_position in f.possible_moves) and (figure.color == f.color):
+            figure.is_protected = True
+        
