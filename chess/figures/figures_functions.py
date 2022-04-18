@@ -132,8 +132,102 @@ def checking_squares_for_knight(figure, board, number, letter, xnumber, xletter,
 
 def checking_protection(figure, board):
     figure.is_protected = False
-    
+
     for f in board.all_figures:
         if (figure.current_position in f.possible_moves) and (figure.color == f.color):
             figure.is_protected = True
         
+
+def possible_pawn_moves(pawn, board, number, letter, asc_letter):
+
+    if (pawn.color == 'w') and (pawn.first_move == True):
+        for i in range(2, 0, -1):
+            new_number = number + i
+            possible_move = f'{letter} + {new_number}'
+
+            if (possible_move) not in board.taken_squares:
+                pawn.possible_moves.append(possible_move)
+
+
+        if (pawn.color == 'w') and (pawn.first_move == False):
+            new_number = number + 1
+            possible_move = f'{letter} + {new_number}'
+
+            if (possible_move not in board.taken_squares and (possible_move in board.all_squares)):
+                pawn.possible_moves.append(possible_move)
+
+            for i in range(-1, 3, 2):
+                new_letter = chr(asc_letter + i)
+                possible_move = f'{new_letter} + {new_number}'
+                big_step = f'{new_letter} + {number}'
+
+                if (possible_move in board.all_squares) and (big_step in board.all_squares):
+
+                    side_figure = (find_figure_by_position(board.all_figures, big_step))
+                    if ('en_passant_possible' in dir(side_figure)):
+                        french_pawn = side_figure
+                    other_figure = find_figure_by_position(board.all_figures, possible_move)
+
+                    if ((possible_move in board.taken_squares) and (other_figure.color != 'w'))\
+                    or\
+                    ((possible_move not in board.taken_squares) and (french_pawn.color != 'w') and (french_pawn.en_passant_possible == True)):
+                        pawn.possible_moves.append(possible_move)
+
+
+        if (pawn.color == 'b') and (pawn.first_move == True):
+            for i in range(2, 0, -1):
+                new_number = number - i
+                possible_move = f'{letter} + {new_number}'
+
+                if (possible_move) not in board.taken_squares:
+                    pawn.possible_moves.append(possible_move)
+
+
+        if (pawn.color == 'b') and (pawn.first_move == False):
+            new_number = number - 1
+            possible_move = f'{letter} + {new_number}'
+
+            if possible_move not in board.taken_squares:
+                pawn.possible_moves.append(possible_move)
+
+            for i in range(-1, 3, 2):
+                new_letter = chr(asc_letter + i)
+                possible_move = f'{new_letter} + {new_number}'
+                big_step = f'{new_letter} + {number}'
+
+                if (possible_move in board.all_squares) and (big_step in board.all_squares):
+                    side_figure = (find_figure_by_position(board.all_figures, big_step))
+                    if ('en_passant_possible' in dir(side_figure)):
+                        french_pawn = side_figure
+                    other_figure = find_figure_by_position(board.all_figures, possible_move)
+
+                    if ((possible_move in board.taken_squares) and (other_figure.color != 'b'))\
+                    or\
+                    ((possible_move not in board.taken_squares) and (french_pawn.color != 'b') and (french_pawn.en_passant_possible == True)):
+                        pawn.possible_moves.append(possible_move)
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
+# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????        
