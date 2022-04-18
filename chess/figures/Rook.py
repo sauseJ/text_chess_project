@@ -3,9 +3,10 @@ from chess.figures.figures_functions import checking_all_sides
 
 class Rook(Figure):
 
-    def __init__():
-        pass
-
+    def __init__(self, first_move = True):
+        self.first_move = first_move
+        
+        
     def check_possible_moves(self, board):
         self.possible_moves = []
         letter = self.current_position[0]
