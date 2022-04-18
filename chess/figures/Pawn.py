@@ -1,5 +1,4 @@
 from chess.figures.figures_functions import possible_pawn_moves
-from figures_functions import find_figure_by_position
 from base import Figure
 
 class Pawn(Figure):
