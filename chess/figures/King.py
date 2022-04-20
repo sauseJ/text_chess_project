@@ -1,4 +1,4 @@
-from chess.figures.figures_functions import castle_kingside, castle_queenside
+from chess.figures.figures_functions import castle_kingside, castle_queenside, checking_squares_for_king
 from base import Figure
 
 class King(Figure):
@@ -13,6 +13,7 @@ class King(Figure):
         asc_letter = ord(letter)
         number = self.current_position[1]
 
+        checking_squares_for_king(self, board, number, asc_letter)
         
 
     def move(self, new_position):
