@@ -5,7 +5,14 @@ def find_figure_by_position(all_figures, position):
     for figure in all_figures:
         if figure.current_position == position:
             return figure
-    
+
+def check_if_square_is_under_attack(all_figures, position, king):
+    for figure in all_figures:
+        if (position in figure.possible_moves) and (figure.color != king.color):
+            return True
+        else:
+            return False
+
 
 
 def checking_diogonals(figure, board, up_number, down_number, up_letter, down_letter, all_squares, leap_uu=0, leap_ud=0, leap_du=0, leap_dd=0):
@@ -292,3 +299,28 @@ def castle_queenside(king, board, wattackers = 0, battackers = 0):
                 else:
                     print ("You cannot castle queenside")
 
+def checking_squares_for_king(king, board, number, asc_letter):
+    up_number = number + 1
+    down_number = number - 1
+    up_letter = asc_letter + 1
+    down_letter = asc_letter - 1
+    letter = chr(asc_letter)
+    chr_up_letter = chr(up_letter)
+    chr_down_letter = chr(down_letter)
+
+    pm = []
+    possible_move_u = f'{letter} + {up_number}'; pm.append(possible_move_u)
+    possible_move_d = f'{letter} + {down_number}'; pm.append(possible_move_d)
+    possible_move_l = f'{chr_down_letter} + {number}'; pm.append(possible_move_l)
+    possible_move_r = f'{chr_up_letter} + {number}'; pm.append(possible_move_r)
+    possible_move_ur = f'{chr_up_letter} + {up_number}'; pm.append(possible_move_ur)
+    possible_move_ul = f'{chr_down_letter} + {up_number}'; pm.append(possible_move_ul)
+    possible_move_dr = f'{chr_up_letter} + {down_number}'; pm.append(possible_move_dr)
+    possible_move_dl = f'{chr_down_letter} + {down_number}'; pm.append(possible_move_dl)
+
+    for move in pm:
+        if (move in board.all_squares) and (check_if_square_is_under_attack(board.all_figures, move, king) != True):
+            if ((move in board.taken_squares) and (find_figure_by_position(board.all_figures, move).color != king.color))\
+            or (move not in board.taken_squares):
+                king.possible_moves.append(move)
+                
