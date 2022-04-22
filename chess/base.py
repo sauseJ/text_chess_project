@@ -1,7 +1,20 @@
+from chess.figures.Pawn import Pawn
+from chess.figures.Bishop import Bishop
+from chess.figures.Knight import Knight
+from chess.figures.Rook import Rook
+from chess.figures.Queen import Queen
+from chess.figures.King import King
+from chess.utils import register_user
+
 class Users:
 
-    def __init__(self, name, age, sexual_orientation = 'Gay', score = 0 ):
-        pass
+    def __init__(self, name = '', age = 0, sexual_orientation = 'Gay', score = 0, color = '', my_turn = False):
+        self.name = name
+        self.age = age
+        self.sexual_orientation = sexual_orientation
+        self.score = score
+        self.color = color
+        self.my_turn = my_turn
 
 class Board:
 
@@ -44,3 +57,47 @@ class Figure:
         self.is_protected = is_protected
         board.all_figures.append(self)
 
+
+
+
+
+board = Board()
+
+a2Pawn = Pawn(board, 'pa2', 'w', 'a2', is_protected = True)
+b2Pawn = Pawn(board, 'pb2', 'w', 'b2', is_protected = True)
+c2Pawn = Pawn(board, 'pc2', 'w', 'c2', is_protected = True)
+d2Pawn = Pawn(board, 'pd2', 'w', 'd2', is_protected = True)
+e2Pawn = Pawn(board, 'pe2', 'w', 'e2', is_protected = True)
+f2Pawn = Pawn(board, 'pf2', 'w', 'f2', is_protected = True)
+g2Pawn = Pawn(board, 'pg2', 'w', 'g2', is_protected = True)
+h2Pawn = Pawn(board, 'ph2', 'w', 'h2', is_protected = True)
+a1Rook = Rook(board, 'Ra1', 'w', 'a1', is_protected = False)
+h1Rook = Rook(board, 'Rh1', 'w', 'h1', is_protected = False)
+b1Knight = Knight(board, 'Nb1', 'w', 'b1', is_protected = True)
+g1Knight = Knight(board, 'Ng1', 'w', 'g1', is_protected = True)
+c1Bishop = Bishop(board, 'Bc1', 'w', 'c1', is_protected = True)
+f1Bishop = Bishop(board, 'Bf1', 'w', 'f1', is_protected = True)
+d1Queen = Queen(board, 'Qd1', 'w', 'd1', is_protected = True)
+e1King = King(board, 'Ke1', 'w', 'e1', is_protected = True)
+
+a7Pawn = Pawn(board, 'pa7', 'b', 'a7', is_protected = True)
+b7Pawn = Pawn(board, 'pb7', 'b', 'b7', is_protected = True)
+c7Pawn = Pawn(board, 'pc7', 'b', 'c7', is_protected = True)
+d7Pawn = Pawn(board, 'pd7', 'b', 'd7', is_protected = True)
+e7Pawn = Pawn(board, 'pe7', 'b', 'e7', is_protected = True)
+f7Pawn = Pawn(board, 'pf7', 'b', 'f7', is_protected = True)
+g7Pawn = Pawn(board, 'pg7', 'b', 'g7', is_protected = True)
+h7Pawn = Pawn(board, 'ph7', 'b', 'h7', is_protected = True)
+a8Rook = Rook(board, 'Ra8', 'b', 'a8', is_protected = False)
+h8Rook = Rook(board, 'Rh8', 'b', 'h8', is_protected = False)
+b8Knight = Knight(board, 'Nb8', 'b', 'b8', is_protected = True)
+g8Knight = Knight(board, 'Ng8', 'b', 'g8', is_protected = True)
+c8Bishop = Bishop(board, 'Bc8', 'b', 'c8', is_protected = True)
+f8Bishop = Bishop(board, 'Bf8', 'b', 'f8', is_protected = True)
+d8Queen = Queen(board, 'Qd8', 'b', 'd8', is_protected = True)
+e8King = King(board, 'Ke8', 'b', 'e8', is_protected = True)
+
+user1 = Users()
+register_user(user1)
+user2 = Users()
+register_user(user2)
