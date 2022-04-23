@@ -1,4 +1,13 @@
-from classes import Rook
+from chess.figures.Pawn import Pawn
+from chess.figures.Rook import Rook
+
+def find_figure_by_possible_move(all_figures, move, type):
+    possible_figures = []
+    for figure in all_figures:
+        if (isinstance(figure, type)) and (move[-2:] in figure.possible_moves):
+            possible_figures.append(figure)
+    
+        
 
 
 def find_figure_by_position(all_figures, position):
