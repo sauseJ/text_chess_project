@@ -1,11 +1,15 @@
+from turtle import color
+from chess.figures.Bishop import Bishop
 from chess.figures.King import King
+from chess.figures.Knight import Knight
 from chess.figures.Pawn import Pawn
+from chess.figures.Queen import Queen
 from chess.figures.Rook import Rook
 
-def find_figure_by_possible_move(all_figures, move, type):
+def find_figure_by_possible_move(all_figures, move, type, user):
     possible_figures = []
     for figure in all_figures:
-        if (isinstance(figure, type)) and (move[-2:] in figure.possible_moves):
+        if (isinstance(figure, type)) and (move[-2:] in figure.possible_moves) and (figure.color == user.color):
             possible_figures.append(figure)
     
     if len(possible_figures > 1):
@@ -233,32 +237,7 @@ def possible_pawn_moves(pawn, board, number, letter, asc_letter):
                     or\
                     ((possible_move not in board.taken_squares) and (french_pawn.color != 'b') and (french_pawn.en_passant_possible == True)):
                         pawn.possible_moves.append(possible_move)
-# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
-# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
-# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
-# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
-# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
-# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
-# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
-# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
-# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
-# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
-# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
-# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
-# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
-# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
-# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
-# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
-# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
-# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
-# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
-# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
-# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
-# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
-# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
-# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
-# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????
-# BITCH YOU BETTER NOT FORGET THAT THESE PIECES OF SHIT CAN TRANSFORM DO YOU HEAR ME??????????        
+      
 
 def castle_kingside(king, board, wattackers = 0, battackers = 0):
     if (king.first_move == True) and (king.in_check == False):
@@ -347,3 +326,27 @@ def find_my_king(user, board):
         if (king.color == user.color) and (isinstance(king, King)):
             return king
                 
+
+def pawn_promotion(pawn, board, move):
+    if ((pawn.color == 'w') and (move[-3] == '8')) or((pawn.color == 'b') and (move[-3] == '1')):
+        if move[-1] == 'Q':
+            queen = Queen(board, 'Q' + move[-4:-2], pawn.color, move[-4:-2], is_protected = False)
+            checking_protection(queen, board)
+            pawn.is_alive = False
+            return queen
+        elif move[-1] == 'R':
+            rook = Rook(board, 'R' + move[-4:-2], pawn.color, move[-4:-2], is_protected = False)
+            checking_protection(rook, board)
+            pawn.is_alive = False
+            return rook
+        elif move[-1] == 'B':
+            bishop = Bishop(board, 'B' + move[-4:-2], pawn.color, move[-4:-2], is_protected = False)
+            checking_protection(bishop, board)
+            pawn.is_alive = False
+            return bishop
+        elif move[-1] == 'N':
+            knight = Knight(board, 'N' + move[-4:-2], pawn.color, move[-4:-2], is_protected = False)
+            checking_protection(knight, board)
+            pawn.is_alive = False
+            return knight
+        else: print('Impossible promotion')
