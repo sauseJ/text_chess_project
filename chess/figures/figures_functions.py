@@ -1,3 +1,4 @@
+from chess.figures.King import King
 from chess.figures.Pawn import Pawn
 from chess.figures.Rook import Rook
 
@@ -340,4 +341,9 @@ def checking_squares_for_king(king, board, number, asc_letter):
             if ((move in board.taken_squares) and (find_figure_by_position(board.all_figures, move).color != king.color))\
             or (move not in board.taken_squares):
                 king.possible_moves.append(move)
+
+def find_my_king(user, board):
+    for king in board.all_figures:
+        if (king.color == user.color) and (isinstance(king, King)):
+            return king
                 
