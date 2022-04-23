@@ -7,6 +7,14 @@ def find_figure_by_possible_move(all_figures, move, type):
         if (isinstance(figure, type)) and (move[-2:] in figure.possible_moves):
             possible_figures.append(figure)
     
+    if len(possible_figures > 1):
+        for figure in possible_figures:
+            if type == Pawn:
+                if figure.current_position[0] == move[0]:
+                    return figure
+            else:
+                if figure.current_position[0] == move[1]:
+                    return figure
         
 
 
