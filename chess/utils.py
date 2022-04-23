@@ -1,5 +1,5 @@
 import random
-from chess.figures.figures_functions import find_figure_by_possible_move
+from chess.figures.figures_functions import find_figure_by_position, find_figure_by_possible_move
 from chess.figures.Pawn import Pawn
 from chess.figures.Bishop import Bishop
 from chess.figures.Knight import Knight
@@ -29,7 +29,7 @@ def random_side(user1, user2):
         user2.my_turn = True
         print(f'Looks like it\'s {user2.name}\'s turn to move now!')
 
-def figure_check(move, user, board):
+def figure_check(move, board):
     letter = move[0]
     if letter == 'B':
         bishop = find_figure_by_possible_move(board.all_figures, move, Bishop)
@@ -48,13 +48,19 @@ def figure_check(move, user, board):
         return king
     if letter in ['a','b','c','d','e','f','g','h']:
         pawn = find_figure_by_possible_move(board.all_figures, move, Pawn)
+        return pawn
         
 
 
 def action(user, board):
     move = input(f'{user.name}, what\'s your move then: ')
-    figure = figure_check(move, user, board)
-    pass
+    figure = figure_check(move, board)
+
+    if 'x' in move:
+        opponent_figure = find_figure_by_position(board.all_figures, move[-2:])
+        figure.take(move[-2:], opponent_figure)
+    else:
+        figure.move(move[-2:])
 
 def check_for_stalemate(king):
     if (king.possible_moves == False) and (king.in_check == False):
