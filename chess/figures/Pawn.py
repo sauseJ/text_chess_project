@@ -1,5 +1,5 @@
 from chess.figures.figures_functions import possible_pawn_moves
-from base import Figure
+from chess.base import Figure
 
 class Pawn(Figure):
 

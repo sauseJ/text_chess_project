@@ -1,4 +1,4 @@
-from turtle import color
+
 from chess.figures.Bishop import Bishop
 from chess.figures.King import King
 from chess.figures.Knight import Knight

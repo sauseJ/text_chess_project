@@ -1,4 +1,4 @@
-from base import Figure
+from chess.base import Figure
 from chess.figures.figures_functions import checking_all_sides
 
 class Rook(Figure):

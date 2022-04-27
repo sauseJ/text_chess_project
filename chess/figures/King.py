@@ -1,5 +1,5 @@
 from chess.figures.figures_functions import castle_kingside, castle_queenside, checking_squares_for_king
-from base import Figure
+from chess.base import Figure
 
 class King(Figure):
 

@@ -70,6 +70,7 @@ def action(user, board):
             figure.take(move[-2:], opponent_figure)
         else:
             figure.move(move[-2:])
+    return move
 
 def check_for_stalemate(king):
     if (king.possible_moves == False) and (king.in_check == False):
@@ -79,8 +80,19 @@ def check_for_mate(king):
     if (king.possible_moves == False) and (king.in_check == True):
         return True
 
+def check_the_turn(user1, user2):
+    if user1.my_turn:
+        return user1
+    else:
+        return user2
 
-
+def change_turn(user1, user2):
+    if user1.my_turn:
+        user1.my_turn = False
+        user2.my_turn = True
+    else:
+        user1.my_turn = True
+        user2.my_turn = False
 
 
         
