@@ -1,19 +1,21 @@
-from chess.figures.figures_functions import possible_pawn_moves
-from chess.base import Figure
+from chess import based as b
+from chess.figures import figures_functions as ff
 
-class Pawn(Figure):
 
-    def __init__(self, first_move = True, en_passant_possible = False):
+class Pawn(b.Figure):
+
+    def __init__(self, board, name, color, current_position, is_protected, first_move = True, en_passant_possible = False):
         self.first_move = first_move
         self.en_passant_possible = en_passant_possible
+        super().__init__(board, name, color, current_position, is_protected)
 
     def check_possible_moves(self, board):
         self.possible_moves = []
         letter = self.current_position[0]
         asc_letter = ord(letter)
-        number = self.current_position[1]
+        number = int(self.current_position[1])
 
-        possible_pawn_moves(self, board, number, letter, asc_letter)
+        ff.possible_pawn_moves(self, board, number, letter, asc_letter)
 
     def move(self, new_position):
         if (self.is_alive == True) and new_position in self.possible_moves:

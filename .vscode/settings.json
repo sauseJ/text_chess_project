@@ -1,0 +1,38 @@
+{
+    "python.autoComplete.extraPaths": [
+
+
+    ],
+    "python.analysis.extraPaths": [
+        "C:\\Users\\sasha\\Documents\\GitHub\\text_chess_project"
+    ],
+    "terminal.integrated.profiles.windows": {
+        "PowerShell": {
+            "source": "PowerShell",
+            "icon": "terminal-powershell"
+        },
+        "Command Prompt": {
+            "path": [
+                "${env:windir}\\Sysnative\\cmd.exe",
+                "${env:windir}\\System32\\cmd.exe"
+            ],
+            "args": [],
+            "icon": "terminal-cmd"
+        },
+        "Git Bash": {
+            "source": "Git Bash"
+        },
+
+        "Anaconda": {
+            "path": [
+                "${env:windir}\\Sysnative\\cmd.exe",
+                "${env:windir}\\System32\\cmd.exe"
+            ],
+            "args": [
+                "/K",
+                "C:\\ProgramData\\Anaconda3\\Scripts\\activate.bat C:\\ProgramData\\Anaconda3"
+            ]
+        }
+    },
+    "terminal.integrated.defaultProfile.windows": "Anaconda"
+}

@@ -1,12 +1,65 @@
-from numpy import Infinity
 from chess import utils as u
-from chess import based as b
-from chess.figures import Pawn, Bishop, Knight, Rook, Queen, King
+
+class Users:
+
+    def __init__(self, name='', age=0, sexual_orientation='Gay', score=0, color='', my_turn=False):
+        self.name = name
+        self.age = age
+        self.sexual_orientation = sexual_orientation
+        self.score = score
+        self.color = color
+        self.my_turn = my_turn
 
 
-class Game:
+class Board:
+    all_figures = []
+    taken_squares = []
+    all_squares = []
+
+    def __init__(self):
+        for i in range(1, 9, 1):
+            for x in range(97, 105, 1):
+                letter = chr(x)
+                number = i
+                self.all_squares.append(f'{letter}{number}')
+
+    def check_taken_squares(self):
+        self.taken_squares = []
+        for figure in self.all_figures:
+            if figure.is_alive:
+                self.taken_squares.append(figure.current_position)
+
+    def check_all_figures(self):
+        for figure in self.all_figures:
+            if not figure.is_alive:
+                self.all_figures.remove(figure)
+    
+    def check_all_possible_moves(self):
+        for figure in self.all_figures:
+            figure.check_possible_moves(self)
+
+    def refresh(self):
+        self.check_all_figures()
+        self.check_taken_squares()
+        self.check_all_possible_moves()
+
+
+class Figure:
+
+    def __init__(self, board, name, color, current_position, is_protected, is_alive=True, is_checking=False):
+        self.name = name
+        self.color = color
+        self.current_position = current_position
+        self.possible_moves = []
+        self.is_alive = is_alive
+        self.is_checking = is_checking
+        self.is_protected = is_protected
+        board.all_figures.append(self)
+
+
+"""class Game:
     moves = {}
-    board = b.Board()
+    board = Board()
 
     def __init__(self, user1, user2):
         self.user1 = user1
@@ -48,7 +101,7 @@ class Game:
 
     def play(self):
         turn = 0
-        while (u.check_for_mate(self.e8King) and u.check_for_stalemate(self.e1King)) or (turn <= 5):
+        while u.check_for_mate(self.e8king) and u.check_for_stalemate(self.e1King):
             self.board.refresh()
             turner = u.check_the_turn(self.user1, self.user2)
             move = u.action(turner, self.board)
@@ -57,42 +110,9 @@ class Game:
             turn += 1
 
             if turn % 2 != 0:
-                self.moves[str(turn)] = move
+                self.moves[str(turn)].append(move)
             else:
                 self.moves[str(turn - 1)].append(move)
-        for move in self.moves:
-            print(move + '\n')        
-        
-        print('GG\n')
         new_game_mb = input('Would you like to start a new game?\n')
         return new_game_mb
-
-
-
-user1 = b.Users()
-u.register_user(user1)
-user2 = b.Users()
-u.register_user(user2)
-
-is_playing = True
-
-while is_playing == True:
-    how_many_games = 0
-    if how_many_games > 0:
-        user1, user2 = u.change_colors(user1, user2)
-        game = Game(user1, user2)
-        new_game = game.play()
-        if new_game == 'Yes':
-            is_playing = True
-            how_many_games += 1
-        else:
-            is_playing = False
-    else:
-        user1, user2 = u.random_side(user1, user2)
-        game = Game(user1, user2)
-        new_game = game.play()
-        if new_game == 'Yes':
-            is_playing = True
-            how_many_games += 1
-        else:
-            is_playing = False
+"""

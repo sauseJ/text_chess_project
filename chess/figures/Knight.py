@@ -1,21 +1,21 @@
-from chess.base import Figure
-from chess.figures.figures_functions import checking_squares_for_knight
+from chess import based as b
+from chess.figures import figures_functions as ff
 
-class Knight(Figure):
+class Knight(b.Figure):
 
-    def __init__():
-        pass
+    def __init__(self, board, name, color, current_position, is_protected):
+        super().__init__(board, name, color, current_position, is_protected)
 
     def check_possible_moves(self, board):
         self.possible_moves = []
         letter = self.current_position[0]
         asc_letter = ord(letter)
-        number = self.current_position[1]
+        number = int(self.current_position[1])
 
         for x in range(-2, 4, 2):
             xnumber = number + x
             xletter = asc_letter + x
-            checking_squares_for_knight(self, number, asc_letter, xnumber, xletter, board.all_squares)
+            ff.checking_squares_for_knight(self, board, number, asc_letter, xnumber, xletter, board.all_squares)
 
 
     def move(self, new_position):

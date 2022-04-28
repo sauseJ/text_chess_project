@@ -1,19 +1,22 @@
-from chess.figures.figures_functions import castle_kingside, castle_queenside, checking_squares_for_king
-from chess.base import Figure
+from chess.figures import figures_functions as ff
+from chess import based as b
+from chess.figures import Rook
 
-class King(Figure):
 
-    def __init__(self, first_move = True, in_check = False):
+class King(b.Figure):
+
+    def __init__(self, board, name, color, current_position, is_protected, first_move = True, in_check = False):
         self.first_move = first_move
         self.in_check = in_check
+        super().__init__(board, name, color, current_position, is_protected)
 
     def check_possible_moves(self, board):
         self.possible_moves = []
         letter = self.current_position[0]
         asc_letter = ord(letter)
-        number = self.current_position[1]
+        number = int(self.current_position[1])
 
-        checking_squares_for_king(self, board, number, asc_letter)
+        ff.checking_squares_for_king(self, board, number, asc_letter)
         
 
     def move(self, new_position):
@@ -29,8 +32,58 @@ class King(Figure):
         else:
             print('This move is not possible. Please enter something sane')
 
-    def short_castle(self, board):
-        castle_kingside(self, board)
+    def short_castle(self, board, wattackers = 0, battackers = 0):
+        if (self.first_move == True) and (self.in_check == False):
+            if self.color == 'w':
+                rook = ff.find_figure_by_position(board.all_figures, 'h1')
+                if (type(rook) == Rook.Rook) and (rook.color == 'w') and (rook.first_move == True)\
+                and (('f1' and 'g1') not in board.taken_squares):
+                    for figure in board.all_figures:
+                        if ('f1' or 'g1') in figure.possible_moves and figure.color != 'w':
+                            wattackers +=1
+                    if wattackers == 0:
+                        self.current_position = 'g1'
+                        rook.current_position = 'f1'
+                    else:
+                        print ("You cannot castle kingside")
+                    
+        if self.color == 'b':
+                rook = ff.find_figure_by_position(board.all_figures, 'h8')
+                if (type(rook) == Rook.Rook) and (rook.color == 'b') and (rook.first_move == True)\
+                and (('f8' and 'g8') not in board.taken_squares):
+                    for figure in board.all_figures:
+                        if ('f8' or 'g8') in figure.possible_moves and figure.color != 'b':
+                            battackers +=1
+                    if battackers == 0:
+                        self.current_position = 'g8'
+                        rook.current_position = 'f8'
+                    else:
+                        print ("You cannot castle kingside")
 
-    def long_castle(self, board):
-        castle_queenside(self, board)
+    def long_castle(self, board, wattackers = 0, battackers = 0):
+        if (self.first_move == True) and (self.in_check == False):
+            if self.color == 'w':
+                rook = ff.find_figure_by_position(board.all_figures, 'a1')
+                if (type(rook) == Rook.Rook) and (rook.color == 'w') and (rook.first_move == True)\
+                and (('b1' and 'c1' and 'd1') not in board.taken_squares):
+                    for figure in board.all_figures:
+                        if ('b1' or 'c1' or 'd1') in figure.possible_moves and figure.color != 'w':
+                            wattackers +=1
+                    if wattackers == 0:
+                        self.current_position = 'c1'
+                        rook.current_position = 'd1'
+                    else:
+                        print ("You cannot castle queenside")
+
+            if self.color == 'b':
+                rook = ff.find_figure_by_position(board.all_figures, 'a8')
+                if (type(rook) == Rook.Rook) and (rook.color == 'b') and (rook.first_move == True)\
+                and (('b8' and 'c8' and 'd8') not in board.taken_squares):
+                    for figure in board.all_figures:
+                        if ('b8' or 'c8' or 'd8') in figure.possible_moves and figure.color != 'b':
+                            battackers +=1
+                    if battackers == 0:
+                        self.current_position = 'c8'
+                        rook.current_position = 'd8'
+                    else:
+                        print ("You cannot castle queenside")

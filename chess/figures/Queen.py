@@ -1,24 +1,24 @@
-from chess.base import Figure
-from chess.figures.figures_functions import checking_all_sides, checking_diogonals
+from chess import based as b
+from chess.figures import figures_functions as ff
 
-class Queen(Figure):
+class Queen(b.Figure):
 
-    def __init__():
-        pass
+    def __init__(self, board, name, color, current_position, is_protected):
+        super().__init__(board, name, color, current_position, is_protected)
 
     def check_possible_moves(self, board):
         self.possible_moves = []
         letter = self.current_position[0]
         asc_letter = ord(letter)
-        number = self.current_position[1]
+        number = int(self.current_position[1])
 
         for x in range(1, 8, 1):
             up_number = number + x
             down_number = number - x
             up_letter = asc_letter + x
             down_letter = asc_letter - x
-            checking_all_sides(self, board, asc_letter, number, up_number, down_number, up_letter, down_letter, board.all_squares)
-            checking_diogonals(self, board, up_number, down_number, up_letter, down_letter, board.all_squares)
+            ff.checking_all_sides(self, board, asc_letter, number, up_number, down_number, up_letter, down_letter, board.all_squares)
+            ff.checking_diogonals(self, board, up_number, down_number, up_letter, down_letter, board.all_squares)
 
 
     def move(self, new_position):
