@@ -122,7 +122,7 @@ def action(user, board):
             else:
                 figure.move(move[-2:])
 
-        return move
+        return move, board.all_figures
 
     except IndexError:
         print('Nah man, come on! Try again')
@@ -170,3 +170,13 @@ def checking_king_v_king_draw(board):
 
 def checking_last_fifty_moves(moves):
     pass
+
+def check_repetition(positions_list):  
+    for position in positions_list:
+        sorted_position = position.sort()
+        n = positions_list.count(sorted_position)
+
+        if n == 3:
+            return True
+    
+    return False

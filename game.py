@@ -49,12 +49,14 @@ class Game:
     def play(self):
         turn = 0
         order = 1
+        positions_list = []
         
         while True:
             self.board.refresh()
             turner = u.check_the_turn(self.user1, self.user2)
             if u.check_for_stalemate(turner, self.board): break
-            move = u.action(turner, self.board)
+            move, position = u.action(turner, self.board)
+            positions_list.append(position)
 
             if (u.check_for_mate(self.e8King) == False) and (u.check_for_mate(self.e1King) == False):
                 break
