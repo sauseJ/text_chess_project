@@ -3,7 +3,8 @@ from chess.figures import figures_functions as ff
 
 class Bishop(b.Figure):
 
-    def __init__(self, board, name, color, current_position, is_protected):
+    def __init__(self, board, name, color, current_position, is_protected, bcolor):
+        self.bcolor = bcolor
         super().__init__(board, name, color, current_position, is_protected)
 
     def check_possible_moves(self, board):

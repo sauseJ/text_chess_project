@@ -24,8 +24,8 @@ class Game:
     h1Rook = Rook.Rook(board, 'Rh1', 'w', 'h1', is_protected=False)
     b1Knight = Knight.Knight(board, 'Nb1', 'w', 'b1', is_protected=True)
     g1Knight = Knight.Knight(board, 'Ng1', 'w', 'g1', is_protected=True)
-    c1Bishop = Bishop.Bishop(board, 'Bc1', 'w', 'c1', is_protected=True)
-    f1Bishop = Bishop.Bishop(board, 'Bf1', 'w', 'f1', is_protected=True)
+    c1Bishop = Bishop.Bishop(board, 'Bc1', 'w', 'c1', is_protected=True, bcolor='b')
+    f1Bishop = Bishop.Bishop(board, 'Bf1', 'w', 'f1', is_protected=True, bcolor='w')
     d1Queen = Queen.Queen(board, 'Qd1', 'w', 'd1', is_protected=True)
     e1King = King.King(board, 'Ke1', 'w', 'e1', is_protected=True)
 
@@ -41,25 +41,36 @@ class Game:
     h8Rook = Rook.Rook(board, 'Rh8', 'b', 'h8', is_protected=False)
     b8Knight = Knight.Knight(board, 'Nb8', 'b', 'b8', is_protected=True)
     g8Knight = Knight.Knight(board, 'Ng8', 'b', 'g8', is_protected=True)
-    c8Bishop = Bishop.Bishop(board, 'Bc8', 'b', 'c8', is_protected=True)
-    f8Bishop = Bishop.Bishop(board, 'Bf8', 'b', 'f8', is_protected=True)
+    c8Bishop = Bishop.Bishop(board, 'Bc8', 'b', 'c8', is_protected=True, bcolor='w')
+    f8Bishop = Bishop.Bishop(board, 'Bf8', 'b', 'f8', is_protected=True, bcolor='b')
     d8Queen = Queen.Queen(board, 'Qd8', 'b', 'd8', is_protected=True)
     e8King = King.King(board, 'Ke8', 'b', 'e8', is_protected=True)
 
     def play(self):
         turn = 0
-        while (u.check_for_mate(self.e8King) and u.check_for_stalemate(self.e1King)) or (turn <= 5):
+        order = 1
+        
+        while True:
             self.board.refresh()
             turner = u.check_the_turn(self.user1, self.user2)
+            if u.check_for_stalemate(turner, self.board): break
             move = u.action(turner, self.board)
 
-            u.change_turn(self.user1, self.user2)
-            turn += 1
-
-            if turn % 2 != 0:
-                self.moves[str(turn)] = move
+            if (u.check_for_mate(self.e8King) == False) and (u.check_for_mate(self.e1King) == False):
+                break
             else:
-                self.moves[str(turn - 1)].append(move)
+                u.change_turn(self.user1, self.user2)
+                turn += 1
+
+                if turn % 2 != 0:
+                    self.moves[str(order)] = [move]
+                else:
+                    self.moves[str(order)].append(move)
+                    order +=1
+                print(self.moves)
+            
+            
+
         for move in self.moves:
             print(move + '\n')        
         

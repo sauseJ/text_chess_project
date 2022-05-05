@@ -17,7 +17,7 @@ def find_figure_by_possible_move(all_figures, move, type, user):
                 if figure.current_position[0] == move[1]:
                     return figure
     else:
-        return figure
+        return possible_figures[0]
 
 
 def find_my_king(user, board):
@@ -83,47 +83,56 @@ def figure_check(move, board, user):
     if letter == 'B':
         bishop = find_figure_by_possible_move(board.all_figures, move, Bishop.Bishop, user)
         return bishop
-    if letter == 'N':
+    elif letter == 'N':
         knight = find_figure_by_possible_move(board.all_figures, move, Knight.Knight, user)
         return knight
-    if letter == 'R':
+    elif letter == 'R':
         rook = find_figure_by_possible_move(board.all_figures, move, Rook.Rook, user)
         return rook
-    if letter == 'Q':
+    elif letter == 'Q':
         queen = find_figure_by_possible_move(board.all_figures, move, Queen.Queen, user)
         return queen
-    if letter == 'K':
+    elif letter == 'K':
         king = find_figure_by_possible_move(board.all_figures, move, King.King, user)
         return king
-    if letter in ['a','b','c','d','e','f','g','h']:
+    elif letter in ['a','b','c','d','e','f','g','h']:
         pawn = find_figure_by_possible_move(board.all_figures, move, Pawn.Pawn, user)
-        if '=' in move:
-            new_figure = ff.pawn_promotion(pawn, board, move)
-            return new_figure
-        else:
-            return pawn
+        #if '=' in move:
+        #   new_figure = ff.pawn_promotion(pawn, board, move)
+        #   return new_figure
+        #else:
+        return pawn
         
 
 
 def action(user, board):
-    move = input(f'{user.name}, what\'s your move then: ')
-    if move == ('O-O' or '0-0'):
-        ff.find_my_king(user, board).short_castle()
-    elif move == ('O-O-O' or '0-0-0'):
-        ff.find_my_king(user, board).long_castle()
-    else:
-        figure = figure_check(move, board, user)
-
-        if 'x' in move:
-            opponent_figure = ff.find_figure_by_position(board.all_figures, move[-2:])
-            figure.take(move[-2:], opponent_figure)
+    
+    try:
+        move = input(f'{user.name}, what\'s your move then: ')
+        if move == ('O-O' or '0-0'):
+            find_my_king(user, board).short_castle()
+        elif move == ('O-O-O' or '0-0-0'):
+            find_my_king(user, board).long_castle()
         else:
-            figure.move(move[-2:])
-    return move
+            figure = figure_check(move, board, user)
+            
+            if 'x' in move:
+                opponent_figure = ff.find_figure_by_position(board.all_figures, move[-2:])
+                figure.take(move[-2:], opponent_figure)
+            else:
+                figure.move(move[-2:])
 
-def check_for_stalemate(king):
-    if (king.possible_moves == False) and (king.in_check == False):
-        return True
+        return move
+
+    except IndexError:
+        print('Nah man, come on! Try again')
+        return action(user, board)
+
+
+        
+
+
+        
 
 def check_for_mate(king):
     if (king.possible_moves == False) and (king.in_check == True):
@@ -143,5 +152,21 @@ def change_turn(user1, user2):
         user1.my_turn = True
         user2.my_turn = False
 
+def check_for_stalemate(user, board):
+    user_possible_moves = []
 
-        
+    for figure in board.all_figures:
+        if figure.color is user.color:
+            user_possible_moves.append(figure.possible_moves)
+
+    if user_possible_moves is None:
+        return True
+    else:
+        return False
+
+                
+def checking_king_v_king_draw(board):
+    return (len(board.all_figures) == 2)
+
+def checking_last_fifty_moves(moves):
+    pass

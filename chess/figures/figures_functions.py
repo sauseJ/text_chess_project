@@ -25,39 +25,39 @@ def checking_diogonals(figure, board, up_number, down_number, up_letter, down_le
     possible_move_dd = f'{chr_down_letter}{down_number}'
     figure_dd = find_figure_by_position(board.all_figures, possible_move_dd)
 
-    if (possible_move_uu in all_squares) and (possible_move_uu not in board.taken_squares):
+    if (possible_move_uu in all_squares) and (possible_move_uu not in board.taken_squares) and (leap_uu < 1):
         figure.possible_moves.append(possible_move_uu)
 
-    if (possible_move_uu in all_squares) and (possible_move_uu in board.taken_squares) \
-    and (leap_uu < 1) and (figure.color != figure_uu.color):
-        figure.possible_moves.append(possible_move_uu)
+    if (possible_move_uu in all_squares) and (possible_move_uu in board.taken_squares) and (leap_uu < 1): 
+        if (figure.color != figure_uu.color):
+            figure.possible_moves.append(possible_move_uu)
         leap_uu +=1
         
         
-    if (possible_move_ud in all_squares) and (possible_move_ud not in board.taken_squares):
+    if (possible_move_ud in all_squares) and (possible_move_ud not in board.taken_squares) and (leap_ud < 1):
         figure.possible_moves.append(possible_move_ud)
 
-    if (possible_move_ud in all_squares) and (possible_move_ud in board.taken_squares) \
-    and (leap_ud < 1) and (figure.color != figure_ud.color):
-        figure.possible_moves.append(possible_move_ud)
+    if (possible_move_ud in all_squares) and (possible_move_ud in board.taken_squares) and (leap_ud < 1): 
+        if (figure.color != figure_ud.color):
+            figure.possible_moves.append(possible_move_ud)
         leap_ud +=1
 
         
-    if (possible_move_du in all_squares) and (possible_move_du not in board.taken_squares):
+    if (possible_move_du in all_squares) and (possible_move_du not in board.taken_squares) and (leap_du < 1):
         figure.possible_moves.append(possible_move_du)
 
-    if (possible_move_du in all_squares) and (possible_move_du in board.taken_squares) \
-    and (leap_du < 1) and (figure.color != figure_du.color):
-        figure.possible_moves.append(possible_move_du)
+    if (possible_move_du in all_squares) and (possible_move_du in board.taken_squares) and (leap_du < 1): 
+        if (figure.color != figure_du.color):
+            figure.possible_moves.append(possible_move_du)
         leap_du +=1
 
         
-    if (possible_move_dd in all_squares) and (possible_move_dd not in board.taken_squares):
+    if (possible_move_dd in all_squares) and (possible_move_dd not in board.taken_squares) and (leap_dd < 1):
         figure.possible_moves.append(possible_move_dd)
 
-    if (possible_move_dd in all_squares) and (possible_move_dd in board.taken_squares) \
-    and (leap_dd < 1) and (figure.color != figure_dd.color):
-        figure.possible_moves.append(possible_move_dd)
+    if (possible_move_dd in all_squares) and (possible_move_dd in board.taken_squares) and (leap_dd < 1): 
+        if (figure.color != figure_dd.color):
+            figure.possible_moves.append(possible_move_dd)
         leap_dd +=1
         
 def checking_all_sides(figure, board, letter, number, up_number, down_number, up_letter, down_letter, all_squares, leap_u=0, leap_d=0, leap_l=0, leap_r=0):
@@ -74,39 +74,39 @@ def checking_all_sides(figure, board, letter, number, up_number, down_number, up
     possible_move_l = f'{chr_down_letter}{number}'
     figure_l = find_figure_by_position(board.all_figures, possible_move_l)
 
-    if (possible_move_u in all_squares) and (possible_move_u not in board.taken_squares):
+    if (possible_move_u in all_squares) and (possible_move_u not in board.taken_squares) and (leap_u < 1):
         figure.possible_moves.append(possible_move_u)
 
-    if (possible_move_u in all_squares) and (possible_move_u in board.taken_squares) \
-    and (leap_u < 1) and (figure.color != figure_u.color):
-        figure.possible_moves.append(possible_move_u)
+    if (possible_move_u in all_squares) and (possible_move_u in board.taken_squares) and (leap_u < 1): 
+        if (figure.color != figure_u.color):
+            figure.possible_moves.append(possible_move_u)
         leap_u +=1
 
 
-    if (possible_move_d in all_squares) and (possible_move_d not in board.taken_squares):
+    if (possible_move_d in all_squares) and (possible_move_d not in board.taken_squares) and (leap_d < 1):
         figure.possible_moves.append(possible_move_d)
 
-    if (possible_move_d in all_squares) and (possible_move_d in board.taken_squares) \
-    and (leap_d < 1) and (figure.color != figure_d.color):
-        figure.possible_moves.append(possible_move_d)
+    if (possible_move_d in all_squares) and (possible_move_d in board.taken_squares) and (leap_d < 1): 
+        if (figure.color != figure_d.color):
+            figure.possible_moves.append(possible_move_d)
         leap_d +=1
 
     
-    if (possible_move_l in all_squares) and (possible_move_l not in board.taken_squares):
+    if (possible_move_l in all_squares) and (possible_move_l not in board.taken_squares) and (leap_l < 1):
         figure.possible_moves.append(possible_move_l)
 
-    if (possible_move_l in all_squares) and (possible_move_l in board.taken_squares) \
-    and (leap_l < 1) and (figure.color != figure_l.color):
-        figure.possible_moves.append(possible_move_l)
+    if (possible_move_l in all_squares) and (possible_move_l in board.taken_squares) and (leap_l < 1): 
+        if (figure.color != figure_l.color):
+            figure.possible_moves.append(possible_move_l)
         leap_l +=1
 
 
-    if (possible_move_r in all_squares) and (possible_move_u not in board.taken_squares):
-        figure.possible_moves.append(possible_move_u)
-
-    if (possible_move_r in all_squares) and (possible_move_r in board.taken_squares) \
-    and (leap_r < 1) and (figure.color != figure_r.color):
+    if (possible_move_r in all_squares) and (possible_move_r not in board.taken_squares) and (leap_r < 1):
         figure.possible_moves.append(possible_move_r)
+
+    if (possible_move_r in all_squares) and (possible_move_r in board.taken_squares) and (leap_r < 1): 
+        if (figure.color != figure_r.color):
+            figure.possible_moves.append(possible_move_r)
         leap_r +=1
 
 
@@ -116,8 +116,8 @@ def checking_squares_for_knight(figure, board, number, letter, xnumber, xletter,
 
     for y in range(-1, 2, 1):
         if y == 0: continue
-        chr_yletter = f'{chr_letter}{y}'
-        #chr_yletter = chr(yletter)
+        yletter = letter - y
+        chr_yletter = chr(yletter)
         ynumber = number + y
 
         possible_move_num = f'{chr_yletter}{xnumber}'
@@ -181,13 +181,13 @@ def possible_pawn_moves(pawn, board, number, letter, asc_letter):
                         pawn.possible_moves.append(possible_move)
 
 
-        if (pawn.color == 'b') and (pawn.first_move == True):
-            for i in range(2, 0, -1):
-                new_number = number - i
-                possible_move = f'{letter}{new_number}'
+    if (pawn.color == 'b') and (pawn.first_move == True):
+        for i in range(2, 0, -1):
+            new_number = number - i
+            possible_move = f'{letter}{new_number}'
 
-                if (possible_move) not in board.taken_squares:
-                    pawn.possible_moves.append(possible_move)
+            if (possible_move) not in board.taken_squares:
+                pawn.possible_moves.append(possible_move)
 
 
         if (pawn.color == 'b') and (pawn.first_move == False):
@@ -294,7 +294,7 @@ def checking_squares_for_king(king, board, number, asc_letter):
 
     for move in pm:
         if (move in board.all_squares) and (check_if_square_is_under_attack(board.all_figures, move, king) != True):
-            if ((move in board.taken_squares) and (find_figure_by_position(board.all_figures, move).color != king.color))\
+            if ((move in board.taken_squares) and ((find_figure_by_position(board.all_figures, move).color != king.color) and (find_figure_by_position(board.all_figures, move).is_protected != True)))\
             or (move not in board.taken_squares):
-                king.possible_moves.append(move)
-                
+                king.possible_moves.append(move)    
+

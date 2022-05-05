@@ -45,7 +45,7 @@ class King(b.Figure):
                         self.current_position = 'g1'
                         rook.current_position = 'f1'
                     else:
-                        print ("You cannot castle kingside")
+                        raise IndexError("You cannot castle kingside")
                     
         if self.color == 'b':
                 rook = ff.find_figure_by_position(board.all_figures, 'h8')
@@ -58,7 +58,7 @@ class King(b.Figure):
                         self.current_position = 'g8'
                         rook.current_position = 'f8'
                     else:
-                        print ("You cannot castle kingside")
+                        raise IndexError("You cannot castle kingside")
 
     def long_castle(self, board, wattackers = 0, battackers = 0):
         if (self.first_move == True) and (self.in_check == False):
