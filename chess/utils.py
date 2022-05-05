@@ -109,10 +109,10 @@ def action(user, board):
     
     try:
         move = input(f'{user.name}, what\'s your move then: ')
-        if move == ('O-O' or '0-0'):
-            find_my_king(user, board).short_castle()
-        elif move == ('O-O-O' or '0-0-0'):
-            find_my_king(user, board).long_castle()
+        if move == 'O-O' or move == '0-0':
+            find_my_king(user, board).short_castle(board)
+        elif move == 'O-O-O' or move == '0-0-0':
+            find_my_king(user, board).long_castle(board)
         else:
             figure = figure_check(move, board, user)
             
