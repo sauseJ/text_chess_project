@@ -73,7 +73,7 @@ class King(b.Figure):
                         self.current_position = 'c1'
                         rook.current_position = 'd1'
                     else:
-                        print ("You cannot castle queenside")
+                        raise IndexError("You cannot castle queenside")
 
             if self.color == 'b':
                 rook = ff.find_figure_by_position(board.all_figures, 'a8')
@@ -86,4 +86,4 @@ class King(b.Figure):
                         self.current_position = 'c8'
                         rook.current_position = 'd8'
                     else:
-                        print ("You cannot castle queenside")
+                        raise IndexError("You cannot castle queenside")
