@@ -58,7 +58,7 @@ class Game:
             move, position = u.action(turner, self.board)
             positions_list.append(position)
 
-            if (u.check_for_mate(self.e8King) == False) and (u.check_for_mate(self.e1King) == False):
+            if (u.check_for_mate(self.e8King) == False) and (u.check_for_mate(self.e1King) == False) and (u.checking_for_draws(turner, self.board, positions_list, self.moves) == True):
                 break
             else:
                 u.change_turn(self.user1, self.user2)

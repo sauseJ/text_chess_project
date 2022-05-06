@@ -192,3 +192,50 @@ def check_repetition(positions_list):
         return n == 3
     
     return False
+
+def checking_king_bishop_vs_king(board):
+    if len(board.all_figures) == 3:
+        for figure in board.all_figures:
+            if isinstance(figure, Bishop.Bishop):
+                return True
+        return False
+
+    return False
+
+def checking_king_knight_vs_king(board):
+    if len(board.all_figures) == 3:
+        for figure in board.all_figures:
+            if isinstance(figure, Knight.Knight):
+                return True
+        return False
+    
+    return False
+
+def checking_king_bishop_vs_king_bishop(board):
+    bishops = []
+
+    if len(board.all_figures) == 4:
+        for figure in board.all_figures:
+            if isinstance(figure, Bishop.Bishop):
+                bishops.append(figure)
+    
+        if (len(bishops) == 2) and (bishops[0].bcolor is bishops[1].bcolor):
+            return True
+        
+        return False
+    return False
+
+def checking_for_draws(user, board, positions_list, moves):
+    a = check_for_stalemate(user, board)
+    b = check_repetition(positions_list)
+    c = checking_king_v_king_draw(board)
+    d = checking_king_bishop_vs_king(board)
+    e = checking_king_knight_vs_king(board)
+    f = checking_last_fifty_moves(moves)
+    g = checking_king_bishop_vs_king_bishop(board)
+
+    if a == b == c == d == e == f == g == True:
+        return True
+    return False
+
+            
