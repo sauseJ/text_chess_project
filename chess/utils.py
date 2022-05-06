@@ -169,14 +169,26 @@ def checking_king_v_king_draw(board):
     return (len(board.all_figures) == 2)
 
 def checking_last_fifty_moves(moves):
-    pass
+    count = 0
+
+    if len(moves) < 50:
+        return False
+    else:
+        for i in range(1, 51):
+            for m in range(2):
+                key = list(moves)[-i]
+                values = moves[key]
+                
+                if ('x' in values[m]) or (values[m][0] in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']):
+                    count +=1
+        
+        return count == 0
 
 def check_repetition(positions_list):  
     for position in positions_list:
         sorted_position = position.sort()
         n = positions_list.count(sorted_position)
 
-        if n == 3:
-            return True
+        return n == 3
     
     return False
