@@ -53,13 +53,23 @@ class Game:
         
         while True:
             self.board.refresh()
+
+            if u.check_for_mate(self.e8King) or u.check_for_mate(self.e1King):
+                print('Lmao git gud\n')
+                new_game_mb = input('Would you like to start a new game?\n')
+                return new_game_mb
+
+
             turner = u.check_the_turn(self.user1, self.user2)
             if u.check_for_stalemate(turner, self.board): break
             move, position = u.action(turner, self.board)
             positions_list.append(position)
 
-            if (u.check_for_mate(self.e8King) == False) and (u.check_for_mate(self.e1King) == False) and (u.checking_for_draws(turner, self.board, positions_list, self.moves) == True):
-                break
+            if u.checking_for_draws(turner, self.board, positions_list, self.moves) == True:
+                print('1/2 bitch\n')
+                new_game_mb = input('Would you like to start a new game?\n')
+                return new_game_mb
+    
             else:
                 u.change_turn(self.user1, self.user2)
                 turn += 1

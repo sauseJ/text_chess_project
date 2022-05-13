@@ -186,9 +186,9 @@ def checking_last_fifty_moves(moves):
 
 def check_repetition(positions_list):  
     for position in positions_list:
-        sorted_position = position.sort()
-        n = positions_list.count(sorted_position)
-
+        #sorted_position = position.sort()
+        #n = positions_list.count(sorted_position)
+        n = positions_list.count(position)
         return n == 3
     
     return False
@@ -227,14 +227,14 @@ def checking_king_bishop_vs_king_bishop(board):
 
 def checking_for_draws(user, board, positions_list, moves):
     a = check_for_stalemate(user, board)
-    b = check_repetition(positions_list)
+    #b = check_repetition(positions_list)
     c = checking_king_v_king_draw(board)
     d = checking_king_bishop_vs_king(board)
     e = checking_king_knight_vs_king(board)
     f = checking_last_fifty_moves(moves)
     g = checking_king_bishop_vs_king_bishop(board)
 
-    if a == b == c == d == e == f == g == True:
+    if a or c or d or e or f or g:
         return True
     return False
 
