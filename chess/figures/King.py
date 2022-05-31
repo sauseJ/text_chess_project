@@ -31,6 +31,12 @@ class King(b.Figure):
             other_piece.is_alive = False
         else:
             print('This move is not possible. Please enter something sane')
+    
+    def am_i_in_check(self, board):
+        for figure in board.all_figures:
+            if (self.current_position in figure.possible_moves) and (figure.color != self.color):
+                self.in_check = True
+        
 
     def short_castle(self, board, wattackers = 0, battackers = 0):
         if (self.first_move == True) and (self.in_check == False):
