@@ -121,6 +121,8 @@ def action(user, board):
                 figure.take(move[-2:], opponent_figure)
             else:
                 figure.move(move[-2:])
+        
+        check_checking()
 
         return move, board.all_figures
 
@@ -237,5 +239,16 @@ def checking_for_draws(user, board, positions_list, moves):
     if a or c or d or e or f or g:
         return True
     return False
+
+def check_checking(user, board):
+    cboard = board.copy()
+    cboard.refresh()
+
+    king = find_my_king(user, cboard)
+
+    if king.in_check == True:
+        raise IndexError("You're still in check")
+    
+
 
             
