@@ -1,4 +1,3 @@
-from numpy import Infinity
 from chess import utils as u
 from chess import based as b
 from chess.figures import Pawn, Bishop, Knight, Rook, Queen, King
@@ -53,6 +52,8 @@ class Game:
         
         while True:
             self.board.refresh()
+            self.e8King.am_i_in_check(self.board)
+            self.e1King.am_i_in_check(self.board)
 
             if u.check_for_mate(self.e8King) or u.check_for_mate(self.e1King):
                 print('Lmao git gud\n')

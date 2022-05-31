@@ -115,6 +115,7 @@ def action(user, board):
             find_my_king(user, board).long_castle(board)
         else:
             figure = figure_check(move, board, user)
+            prev_pos = figure.current_position
             
             if 'x' in move:
                 opponent_figure = ff.find_figure_by_position(board.all_figures, move[-2:])
@@ -122,7 +123,7 @@ def action(user, board):
             else:
                 figure.move(move[-2:])
         
-        check_checking()
+        check_checking(user, board, figure, prev_pos)
 
         return move, board.all_figures
 
@@ -240,14 +241,22 @@ def checking_for_draws(user, board, positions_list, moves):
         return True
     return False
 
-def check_checking(user, board):
-    cboard = board.copy()
-    cboard.refresh()
-
-    king = find_my_king(user, cboard)
+def check_checking(user, board, figure, prev_pos):
+    af = board.all_figures.copy()
+    ts = board.taken_squares.copy()
+    
+    
+    board.refresh()
+    king = find_my_king(user, board)
+    king.am_i_in_check(board)
 
     if king.in_check == True:
+        board.all_figures = af
+        board.taken_squares = ts
+        figure.current_position = prev_pos
         raise IndexError("You're still in check")
+    else:
+        return
     
 
 
