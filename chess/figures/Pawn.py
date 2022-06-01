@@ -20,6 +20,7 @@ class Pawn(b.Figure):
     def move(self, new_position):
         if (self.is_alive == True) and new_position in self.possible_moves:
             self.current_position = new_position
+            self.first_move = False
         else:
             print('This move is not possible. Please enter something sane')
 
