@@ -55,12 +55,6 @@ class Game:
             self.e8King.am_i_in_check(self.board)
             self.e1King.am_i_in_check(self.board)
 
-            if u.check_for_mate(turner, self.board):
-                print('Lmao git gud\n')
-                new_game_mb = input('Would you like to start a new game?\n')
-                return new_game_mb
-
-
             turner = u.check_the_turn(self.user1, self.user2)
             
             if u.check_for_mate(turner, self.board):
