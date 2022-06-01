@@ -13,12 +13,17 @@ class Bishop(b.Figure):
         asc_letter = ord(letter)
         number = int(self.current_position[1])
 
+        leap_uu = 0
+        leap_ud = 0
+        leap_du = 0
+        leap_dd = 0
+
         for x in range(1, 8, 1):
             up_number = number + x
             down_number = number - x
             up_letter = asc_letter + x
             down_letter = asc_letter - x
-            ff.checking_diogonals(self, board, up_number, down_number, up_letter, down_letter, board.all_squares)
+            leap_uu, leap_ud, leap_du, leap_dd = ff.checking_diogonals(self, board, up_number, down_number, up_letter, down_letter, board.all_squares, leap_uu, leap_ud, leap_du, leap_dd)
 
 
     def move(self, new_position):

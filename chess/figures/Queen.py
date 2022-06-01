@@ -12,13 +12,24 @@ class Queen(b.Figure):
         asc_letter = ord(letter)
         number = int(self.current_position[1])
 
+        leap_u = 0
+        leap_d = 0
+        leap_l = 0
+        leap_r = 0
+
+        leap_uu = 0
+        leap_ud = 0
+        leap_du = 0
+        leap_dd = 0
+
         for x in range(1, 8, 1):
             up_number = number + x
             down_number = number - x
             up_letter = asc_letter + x
             down_letter = asc_letter - x
-            ff.checking_all_sides(self, board, asc_letter, number, up_number, down_number, up_letter, down_letter, board.all_squares)
-            ff.checking_diogonals(self, board, up_number, down_number, up_letter, down_letter, board.all_squares)
+
+            leap_u, leap_d, leap_l, leap_r = ff.checking_all_sides(self, board, asc_letter, number, up_number, down_number, up_letter, down_letter, board.all_squares, leap_u, leap_d, leap_l, leap_r)
+            leap_uu, leap_ud, leap_du, leap_dd = ff.checking_diogonals(self, board, up_number, down_number, up_letter, down_letter, board.all_squares, leap_uu, leap_ud, leap_du, leap_dd)
 
 
     def move(self, new_position):

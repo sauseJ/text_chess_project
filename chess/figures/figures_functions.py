@@ -59,7 +59,9 @@ def checking_diogonals(figure, board, up_number, down_number, up_letter, down_le
         if (figure.color != figure_dd.color):
             figure.possible_moves.append(possible_move_dd)
         leap_dd +=1
-        
+    
+    return leap_uu, leap_ud, leap_du, leap_dd
+
 def checking_all_sides(figure, board, letter, number, up_number, down_number, up_letter, down_letter, all_squares, leap_u=0, leap_d=0, leap_l=0, leap_r=0):
     chr_up_letter = chr(up_letter)
     chr_down_letter = chr(down_letter)
@@ -108,6 +110,8 @@ def checking_all_sides(figure, board, letter, number, up_number, down_number, up
         if (figure.color != figure_r.color):
             figure.possible_moves.append(possible_move_r)
         leap_r +=1
+
+    return leap_u, leap_d, leap_l, leap_r
 
 
 def checking_squares_for_knight(figure, board, number, letter, xnumber, xletter, all_squares):
