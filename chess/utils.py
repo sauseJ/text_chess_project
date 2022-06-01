@@ -137,9 +137,18 @@ def action(user, board):
 
         
 
-def check_for_mate(king):
-    if (king.possible_moves == False) and (king.in_check == True):
+def check_for_mate(user, board):
+    user_possible_moves = []
+    my_king = find_my_king(user, board)
+
+    for figure in board.all_figures:
+        if figure.color is user.color:
+            user_possible_moves.append(figure.possible_moves)
+
+    if (user_possible_moves is None) and (my_king.in_check == True):
         return True
+    else:
+        return False
 
 def check_the_turn(user1, user2):
     if user1.my_turn:
@@ -157,12 +166,13 @@ def change_turn(user1, user2):
 
 def check_for_stalemate(user, board):
     user_possible_moves = []
+    my_king = find_my_king(user, board)
 
     for figure in board.all_figures:
         if figure.color is user.color:
             user_possible_moves.append(figure.possible_moves)
 
-    if user_possible_moves is None:
+    if (user_possible_moves is None) and (my_king.in_check == False):
         return True
     else:
         return False
