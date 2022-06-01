@@ -33,9 +33,16 @@ class King(b.Figure):
             print('This move is not possible. Please enter something sane')
     
     def am_i_in_check(self, board):
+        c = 0
+
         for figure in board.all_figures:
             if (self.current_position in figure.possible_moves) and (figure.color != self.color):
-                self.in_check = True
+                c += 1
+
+        if c >= 0:
+            self.in_check = True
+        else:
+            self.in_check = False
         
 
     def short_castle(self, board, wattackers = 0, battackers = 0):
