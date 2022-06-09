@@ -62,7 +62,10 @@ class Game:
                 new_game_mb = input('Would you like to start a new game?\n')
                 return new_game_mb
 
-            if u.check_for_stalemate(turner, self.board): break
+            if u.check_for_stalemate(turner, self.board):
+                print('S P A R E D\n')
+                new_game_mb = input('Would you like to start a new game?\n')
+                return new_game_mb
             
             move, position = u.action(turner, self.board)
             positions_list.append(position)
