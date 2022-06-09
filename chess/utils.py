@@ -138,14 +138,9 @@ def action(user, board):
         
 
 def check_for_mate(user, board):
-    user_possible_moves = []
     my_king = find_my_king(user, board)
 
-    for figure in board.all_figures:
-        if figure.color is user.color:
-            user_possible_moves.append(figure.possible_moves)
-
-    if (user_possible_moves is None) and (my_king.in_check == True):
+    if (moves_checking(user, board)) and (my_king.in_check == True):
         return True
     else:
         return False
@@ -165,14 +160,9 @@ def change_turn(user1, user2):
         user2.my_turn = False
 
 def check_for_stalemate(user, board):
-    user_possible_moves = []
     my_king = find_my_king(user, board)
 
-    for figure in board.all_figures:
-        if figure.color is user.color:
-            user_possible_moves.append(figure.possible_moves)
-
-    if (user_possible_moves is None) and (my_king.in_check == False):
+    if (moves_checking(user, board)) and (my_king.in_check == False):
         return True
     else:
         return False
@@ -267,7 +257,54 @@ def check_checking(user, board, figure, prev_pos):
         raise IndexError("You're still in check")
     else:
         return
+
+def moves_checking(user, board):
+    king = find_my_king(user, board)
+    king.am_i_in_check(board)
+    if king.in_check == False:
+        return False
     
+
+    pm = 0
+    enemy = None
+
+    for figure in board.all_figures:
+        if figure.color == user.color:
+            af = board.all_figures.copy()
+            ts = board.taken_squares.copy()
+            
+            if figure.possible_moves:
+                for move in figure.possible_moves:
+                    if move in board.taken_squares:
+                        enemy = ff.find_figure_by_position(board.all_figures, move)
+                        enemy.is_alive = False
+                    
+                    prev_pos = figure.current_position
+                    figure.current_position = move
+                    board.refresh()
+                    king = find_my_king(user, board)
+                    king.am_i_in_check(board)
+
+                    if king.in_check == True:
+                        board.all_figures = af
+                        board.taken_squares = ts
+                        figure.current_position = prev_pos
+                        if enemy:
+                            enemy.is_alive = True
+                            enemy.current_position = move
+                    else:
+                        board.all_figures = af
+                        board.taken_squares = ts
+                        figure.current_position = prev_pos
+                        if enemy:
+                            enemy.is_alive = True
+                            enemy.current_position = move 
+                        pm += 1
+                    
+                    board.refresh()
+
+    return pm == 0
+
 
 
             
