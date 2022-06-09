@@ -39,9 +39,9 @@ class King(b.Figure):
             if (self.current_position in figure.possible_moves) and (figure.color != self.color):
                 c += 1
 
-        if c >= 0:
+        if c > 0:
             self.in_check = True
-        else:
+        if c == 0:
             self.in_check = False
         
 

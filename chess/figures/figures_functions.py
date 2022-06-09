@@ -2,6 +2,8 @@ def find_figure_by_position(all_figures, position):
     for figure in all_figures:
         if figure.current_position == position:
             return figure
+        else:
+            continue
 
 def check_if_square_is_under_attack(all_figures, position, king):
     for figure in all_figures:
